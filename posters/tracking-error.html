@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracking Error – concept poster by Jisk Dockey</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@1,62..125,800..900&amp;family=Permanent+Marker&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+<style>html,body{margin:0;background:#0b0b0a;overflow:hidden}</style>
+</head>
+<body>
+
+<div id="poster" style="transform-origin: 0 0; width: 1080px; height: 1350px; position: relative; overflow: hidden; background: linear-gradient(175deg, #0d0620 0%, #2a0b45 30%, #8a1d5e 58%, #d9503a 80%, #f4a457 100%); color: #ffffff; font-family: VT323, 'Courier New', monospace">
+
+  <svg aria-hidden="true" viewBox="0 0 1080 1350" style="position: absolute; inset: 0; width: 100%; height: 100%">
+    <defs>
+      <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"></feGaussianBlur></filter>
+      <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter>
+      <filter id="tracking" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9 0.02" numOctaves="1" seed="11" result="t"></feTurbulence>
+        <feColorMatrix in="t" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  1.6 0 0 0 -0.55" result="streaks"></feColorMatrix>
+        <feComposite in="streaks" in2="SourceAlpha" operator="in"></feComposite>
+      </filter>
+    </defs>
+    <g stroke="#39ff9e" stroke-linecap="round" opacity="0.32" filter="url(#glow)" stroke-width="12">
+      <line x1="540" y1="-60" x2="-220" y2="1350"></line>
+      <line x1="540" y1="-60" x2="40" y2="1350"></line>
+      <line x1="540" y1="-60" x2="290" y2="1350"></line>
+      <line x1="540" y1="-60" x2="540" y2="1350"></line>
+      <line x1="540" y1="-60" x2="790" y2="1350"></line>
+      <line x1="540" y1="-60" x2="1040" y2="1350"></line>
+      <line x1="540" y1="-60" x2="1300" y2="1350"></line>
+    </g>
+    <g stroke="#39ff9e" stroke-linecap="round" opacity="0.7" stroke-width="3">
+      <line x1="540" y1="-60" x2="-220" y2="1350"></line>
+      <line x1="540" y1="-60" x2="40" y2="1350"></line>
+      <line x1="540" y1="-60" x2="290" y2="1350"></line>
+      <line x1="540" y1="-60" x2="540" y2="1350"></line>
+      <line x1="540" y1="-60" x2="790" y2="1350"></line>
+      <line x1="540" y1="-60" x2="1040" y2="1350"></line>
+      <line x1="540" y1="-60" x2="1300" y2="1350"></line>
+    </g>
+    <rect x="0" y="236" width="1080" height="20" fill="#ffffff" filter="url(#tracking)" opacity="0.8"></rect>
+    <rect x="0" y="868" width="1080" height="34" fill="#ffffff" filter="url(#tracking)" opacity="0.6"></rect>
+    <rect width="1080" height="1350" filter="url(#grain)" opacity="0.2" style="mix-blend-mode: overlay"></rect>
+  </svg>
+
+  <!-- OSD, top -->
+  <div style="position: absolute; top: 44px; left: 56px; right: 56px; display: flex; justify-content: space-between; align-items: flex-start; text-shadow: 0 0 8px rgba(255,255,255,0.55)">
+    <div style="display: flex; flex-direction: column; line-height: 0.95">
+      <span style="font-size: 78px">PLAY ►</span>
+      <span style="font-size: 40px">CH 03</span>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: flex-end; line-height: 0.95">
+      <span style="font-size: 78px">SP</span>
+      <span style="font-size: 40px">0:00:17</span>
+    </div>
+  </div>
+
+  <!-- Title with chromatic split and one tracking slice -->
+  <div style="position: absolute; top: 300px; left: 56px; right: 56px; display: flex; flex-direction: column; gap: 22px">
+    <div style="position: relative">
+      <h1 style="margin: 0; display: flex; flex-direction: column; font-family: Archivo, 'Arial Black', sans-serif; font-style: italic; font-weight: 900; font-stretch: 80%; font-size: 196px; line-height: 0.88; letter-spacing: -0.01em; text-shadow: -6px 0 0 rgba(255,46,120,0.9), 6px 0 0 rgba(0,229,255,0.9)">
+        <span>TRACKING</span>
+        <span>ERROR</span>
+      </h1>
+      <div aria-hidden="true" style="position: absolute; inset: 0; display: flex; flex-direction: column; font-family: Archivo, 'Arial Black', sans-serif; font-style: italic; font-weight: 900; font-stretch: 80%; font-size: 196px; line-height: 0.88; letter-spacing: -0.01em; color: #ffffff; text-shadow: -10px 0 0 rgba(255,46,120,0.9), 10px 0 0 rgba(0,229,255,0.9); clip-path: inset(41% 0 47% 0); transform: translateX(26px)">
+        <span>TRACKING</span>
+        <span>ERROR</span>
+      </div>
+    </div>
+    <p style="margin: 0; font-size: 46px; line-height: 1; text-shadow: 0 0 8px rgba(255,255,255,0.5)">JUNGLE / DRUM &amp; BASS / 170 BPM</p>
+  </div>
+
+  <!-- Camcorder date stamp + venue -->
+  <div style="position: absolute; left: 56px; bottom: 112px; display: flex; flex-direction: column; gap: 6px; line-height: 0.95">
+    <span style="font-size: 70px; color: #ffd84a; text-shadow: 3px 3px 0 rgba(0,0,0,0.55)">DEC. 19 2026</span>
+    <span style="font-size: 70px; color: #ffd84a; text-shadow: 3px 3px 0 rgba(0,0,0,0.55)">PM 10:00</span>
+    <span style="font-size: 42px; margin-top: 10px; text-shadow: 2px 2px 0 rgba(0,0,0,0.55)">COWGATE, EDINBURGH</span>
+    <span style="font-size: 42px; text-shadow: 2px 2px 0 rgba(0,0,0,0.55)">22:00 – 03:00</span>
+  </div>
+
+  <!-- Handwritten tape label with the line-up -->
+  <div style="position: absolute; right: 56px; bottom: 116px; width: 450px; transform: rotate(-3deg); background-color: #f6f3ea; background-image: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 47px, rgba(60,90,160,0.35) 47px, rgba(60,90,160,0.35) 49px); color: #1b1b2e; padding: 18px 26px 22px; box-shadow: 8px 10px 0 rgba(0,0,0,0.35); display: flex; flex-direction: column; font-family: 'Permanent Marker', 'Comic Sans MS', cursive; font-size: 38px; line-height: 49px">
+    <span style="font-family: VT323, monospace; font-size: 26px; line-height: 30px; color: #b0245e">TAPE 03 · LINE-UP</span>
+    <span>Tape Saint</span>
+    <span>Phaze 9</span>
+    <span>Lowkey Ritual</span>
+    <span>host: MC Dexa</span>
+  </div>
+
+  <!-- Footer -->
+  <div style="position: absolute; left: 56px; right: 56px; bottom: 40px; display: flex; justify-content: space-between; gap: 24px; font-size: 30px; text-shadow: 2px 2px 0 rgba(0,0,0,0.55)">
+    <span>BE KIND, REWIND</span>
+    <span>ARTWORK: JISK DOCKEY</span>
+  </div>
+
+  
+    <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.26) 0px, rgba(0,0,0,0.26) 2px, rgba(0,0,0,0) 2px, rgba(0,0,0,0) 4px)"></div>
+  
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 75% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)"></div>
+
+</div>
+
+<script>
+{ const f=()=>{const s=window.innerWidth/1080;document.getElementById('poster').style.transform='scale('+s+')';};
+  addEventListener('resize',f); f(); }
+</script>
+</body>
+</html>
