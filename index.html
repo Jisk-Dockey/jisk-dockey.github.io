@@ -23,7 +23,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 input::placeholder,textarea::placeholder{color:#8f8c85}
 .spin{animation:spin 1.8s linear infinite;will-change:transform}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (max-width: 600px){.tile{aspect-ratio:16 / 9 !important}}
 </style>
 </head>
 <body>
@@ -36,7 +35,7 @@ input::placeholder,textarea::placeholder{color:#8f8c85}
     <div style="max-width: 1240px; margin: 0 auto; padding: 18px max(5vw, 20px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
       <a href="#top" style="display: flex; align-items: baseline; gap: 12px; text-decoration: none; color: #ecebe6">
         <span style="font-weight: 800; font-stretch: 70%; font-size: 26px; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1">Jisk Dockey</span>
-        <span style="font-size: 14px; color: #a09d95">Club night design</span>
+        <span style="font-size: 14px; color: #a09d95; letter-spacing: 0.06em">CLUB NIGHT DESIGN</span>
       </a>
       <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
         <a href="#work" style="text-decoration: none; font-weight: 500; color: #a09d95">Work</a>
@@ -87,7 +86,7 @@ input::placeholder,textarea::placeholder{color:#8f8c85}
         </div>
 
         <div style="flex: 2 1 320px; display: flex; flex-direction: column; gap: 28px; padding-bottom: 8px">
-          <p style="margin: 0; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; max-width: 30em">I design posters, socials and full launch packs for house, techno, disco, drum and bass and whatever else fills a dark room. Nights with a proper sound system and a crowd that came for the music, not the photos.</p>
+          <p style="margin: 0; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.5; max-width: 30em">I design posters, socials and full launch packs for HOUSE, TECHNO, DISCO, DRUM AND BASS and whatever else fills a dark room. Nights with a proper sound system and a crowd that came for the music, not the photos.</p>
           <div style="display: flex; flex-wrap: wrap; gap: 12px">
             <a href="#packages" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; background: var(--accent); color: #0b0b0a; text-decoration: none; font-weight: 700; white-space: nowrap">Book a launch pack · £300</a>
             <a href="#work" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border: 1px solid #ecebe6; color: #ecebe6; text-decoration: none; font-weight: 600">See the work</a>
@@ -101,30 +100,27 @@ input::placeholder,textarea::placeholder{color:#8f8c85}
   <section id="work" style="border-top: 1px solid #3a3835; padding: clamp(48px, 6vw, 96px) 0">
     <div style="max-width: 1240px; margin: 0 auto; padding: 0 max(5vw, 20px); display: flex; flex-direction: column; gap: 32px">
       <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px">
-        <h2 style="margin: 0; font-weight: 800; font-stretch: 68%; font-size: clamp(40px, 5vw, 72px); line-height: 0.95; text-transform: uppercase">Recent work</h2>
-        <p style="margin: 0; color: #a09d95">New work for nights in Glasgow and Edinburgh drops here first.</p>
+        <h2 style="margin: 0; font-weight: 800; font-stretch: 68%; font-size: clamp(30px, 3.6vw, 52px); line-height: 0.95; text-transform: uppercase">Examples / Recent work</h2>
+        <p style="margin: 0; color: #a09d95">Concept posters for made-up nights. Tap one to see it full size.</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px">
         <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px">
-          <div class="tile" style="aspect-ratio: 4 / 5; background: #161514; border: 1px solid #2c2a27; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; color: #a09d95">
-            <span style="font-size: 13px">JD002</span>
-            <span style="font-weight: 800; font-stretch: 68%; font-size: clamp(28px, 3vw, 40px); line-height: 0.95; text-transform: uppercase; color: #ecebe6">Poster</span>
-          </div>
-          <figcaption style="font-size: 15px; color: #a09d95">Coming soon</figcaption>
+          <a href="posters/solvent.html" aria-label="Open the Solvent: hard techno, Glasgow poster full size" style="position: relative; display: block; aspect-ratio: 4 / 5; border: 1px solid #2c2a27; overflow: hidden; background: #161514">
+            <iframe src="posters/solvent.html" title="Solvent: hard techno, Glasgow concept poster" loading="lazy" tabindex="-1" scrolling="no" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none"></iframe>
+          </a>
+          <figcaption style="font-size: 15px; color: #a09d95">JD002 · Solvent · hard techno</figcaption>
         </figure>
         <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px">
-          <div class="tile" style="aspect-ratio: 4 / 5; background: #161514; border: 1px solid #2c2a27; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; color: #a09d95">
-            <span style="font-size: 13px">JD003</span>
-            <span style="font-weight: 800; font-stretch: 68%; font-size: clamp(28px, 3vw, 40px); line-height: 0.95; text-transform: uppercase; color: #ecebe6">Social pack</span>
-          </div>
-          <figcaption style="font-size: 15px; color: #a09d95">Coming soon</figcaption>
+          <a href="posters/slow-bloom.html" aria-label="Open the Slow Bloom: deep house, Edinburgh poster full size" style="position: relative; display: block; aspect-ratio: 4 / 5; border: 1px solid #2c2a27; overflow: hidden; background: #161514">
+            <iframe src="posters/slow-bloom.html" title="Slow Bloom: deep house, Edinburgh concept poster" loading="lazy" tabindex="-1" scrolling="no" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none"></iframe>
+          </a>
+          <figcaption style="font-size: 15px; color: #a09d95">JD003 · Slow Bloom · deep house</figcaption>
         </figure>
         <figure style="margin: 0; display: flex; flex-direction: column; gap: 10px">
-          <div class="tile" style="aspect-ratio: 4 / 5; background: #161514; border: 1px solid #2c2a27; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; color: #a09d95">
-            <span style="font-size: 13px">JD004</span>
-            <span style="font-weight: 800; font-stretch: 68%; font-size: clamp(28px, 3vw, 40px); line-height: 0.95; text-transform: uppercase; color: #ecebe6">Identity</span>
-          </div>
-          <figcaption style="font-size: 15px; color: #a09d95">Coming soon</figcaption>
+          <a href="posters/tracking-error.html" aria-label="Open the Tracking Error: jungle and drum and bass, Edinburgh poster full size" style="position: relative; display: block; aspect-ratio: 4 / 5; border: 1px solid #2c2a27; overflow: hidden; background: #161514">
+            <iframe src="posters/tracking-error.html" title="Tracking Error: jungle and drum and bass, Edinburgh concept poster" loading="lazy" tabindex="-1" scrolling="no" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none"></iframe>
+          </a>
+          <figcaption style="font-size: 15px; color: #a09d95">JD004 · Tracking Error · jungle / DnB</figcaption>
         </figure>
       </div>
     </div>
