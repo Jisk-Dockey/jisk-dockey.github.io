@@ -128,7 +128,7 @@ html.lenis body {
     <div style="max-width: 1240px; margin: 0 auto; padding: 0 max(5vw, 20px); display: flex; flex-direction: column; gap: 32px">
       <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px">
         <h2 style="margin: 0; font-weight: 800; font-stretch: 68%; font-size: clamp(30px, 3.6vw, 52px); line-height: 0.95; text-transform: uppercase">Examples / Recent work</h2>
-        <p style="margin: 0; color: #a09d95">Concept posters for made-up nights. Hover over or tap one to play it.</p>
+        <p style="margin: 0; color: #a09d95">Concept posters – tap one to play it.</p>
       </div>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px">
         <figure class="jd-tile" style="margin: 0; display: flex; flex-direction: column; gap: 10px">
@@ -334,12 +334,10 @@ html.lenis body {
       y: 60, opacity: 0, duration: 0.9, ease: 'expo.out',
       scrollTrigger: { trigger: h, start: 'top 88%' } }));
 
-    // poster tiles: staggered rise, then a gentle parallax drift
+    // poster tiles: staggered rise
     const tiles = gsap.utils.toArray('#work figure');
     gsap.from(tiles, { y: 80, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.12,
       scrollTrigger: { trigger: '#work', start: 'top 75%' } });
-    tiles.forEach((f, i) => gsap.to(f.querySelector('.jd-play'), { yPercent: -4 * (i % 2 ? 1 : -1), ease: 'none',
-      scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } }));
 
     // launch-pack tracklist and how-it-works steps tick in one by one
     document.querySelectorAll('section ol').forEach((ol) => gsap.from(ol.children, {
