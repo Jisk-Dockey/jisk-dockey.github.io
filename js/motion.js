@@ -25,9 +25,14 @@
         onEnter: (b) => show(b, dist), onEnterBack: (b) => show(b, axis === 'y' ? -dist : dist),
         onLeave: hide, onLeaveBack: hide });
     };
-    reveal('section h1:not(#top h1), section h2');
-    reveal('.jd-tile', { dist: 80, dur: 1, stagger: 0.12, start: 'top 92%', end: 'bottom 8%' });
-    reveal('section ol > li', { axis: 'x', dist: -30, dur: 0.6, ease: 'power3.out', stagger: 0.08 });
+    const safe = (fn, sel) => { try { fn(); } catch (e) { gsap.set(sel, { opacity: 1, clearProps: 'transform' }); } };   // never leave anything hidden
+    const heads = [...document.querySelectorAll('section h1, section h2')].filter((h) => !h.closest('#top'));
+    safe(() => reveal(heads), heads);
+    safe(() => reveal('.jd-tile', { dist: 80, dur: 1, stagger: 0.12, start: 'top 92%', end: 'bottom 8%' }), '.jd-tile');
+    safe(() => reveal('section ol > li', { axis: 'x', dist: -30, dur: 0.6, ease: 'power3.out', stagger: 0.08 }), 'section ol > li');
+    // fonts and images can shift the page after load; re-measure so triggers fire in the right place
+    addEventListener('load', () => ScrollTrigger.refresh());
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
 
     // the record spins faster while you scroll
     const rec = document.querySelector('.spin');
