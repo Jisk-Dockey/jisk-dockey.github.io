@@ -385,7 +385,7 @@ html.lenis body {
     const from = rectOf(tile);
     const shade = document.createElement('div');
     shade.className = 'jd-shade';
-    shade.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(11,11,10,0.86);opacity:0;cursor:zoom-out';
+    shade.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(11,11,10,0.18);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);opacity:0;cursor:zoom-out';
     const card = document.createElement('div');
     card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true');
     card.setAttribute('aria-label', tile.getAttribute('aria-label').replace('Play the ', ''));
