@@ -15,20 +15,19 @@
     if (h1) SplitText.create(h1, { type: 'words,lines', mask: 'lines', autoSplit: true,
       onSplit: (s) => gsap.from(s.words, { yPercent: 110, duration: 0.9, ease: 'expo.out', stagger: 0.05, delay: 0.1 }) });
 
-    // section headings slide up as they come into view
-    gsap.utils.toArray('section h2').forEach((h) => gsap.from(h, {
-      y: 60, opacity: 0, duration: 0.9, ease: 'expo.out',
-      scrollTrigger: { trigger: h, start: 'top 88%' } }));
-
-    // poster tiles: staggered rise
-    const tiles = gsap.utils.toArray('.jd-tile');
-    gsap.from(tiles, { y: 80, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.12,
-      scrollTrigger: { trigger: '#work', start: 'top 75%' } });
-
-    // launch-pack tracklist and how-it-works steps tick in one by one
-    document.querySelectorAll('section ol').forEach((ol) => gsap.from(ol.children, {
-      x: -30, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08,
-      scrollTrigger: { trigger: ol, start: 'top 85%' } }));
+    // reveal things as they scroll into view, from below on the way down and from above on the way back up
+    const reveal = (targets, { axis = 'y', dist = 60, dur = 0.9, ease = 'expo.out', stagger = 0, start = 'top 90%', end = 'bottom 10%' } = {}) => {
+      const els = gsap.utils.toArray(targets); if (!els.length) return;
+      gsap.set(els, { opacity: 0 });
+      const show = (batch, from) => gsap.fromTo(batch, { [axis]: from, opacity: 0 }, { [axis]: 0, opacity: 1, duration: dur, ease, stagger, overwrite: true });
+      const hide = (batch) => gsap.to(batch, { opacity: 0, duration: 0.2, overwrite: true });
+      ScrollTrigger.batch(els, { start, end,
+        onEnter: (b) => show(b, dist), onEnterBack: (b) => show(b, axis === 'y' ? -dist : dist),
+        onLeave: hide, onLeaveBack: hide });
+    };
+    reveal('section h1:not(#top h1), section h2');
+    reveal('.jd-tile', { dist: 80, dur: 1, stagger: 0.12, start: 'top 92%', end: 'bottom 8%' });
+    reveal('section ol > li', { axis: 'x', dist: -30, dur: 0.6, ease: 'power3.out', stagger: 0.08 });
 
     // the record spins faster while you scroll
     const rec = document.querySelector('.spin');
