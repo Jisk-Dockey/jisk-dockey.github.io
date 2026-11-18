@@ -23,6 +23,33 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 input::placeholder,textarea::placeholder{color:#8f8c85}
 .spin{animation:spin 1.8s linear infinite;will-change:transform}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
 </style>
 </head>
 <body>
@@ -260,6 +287,56 @@ input::placeholder,textarea::placeholder{color:#8f8c85}
       encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   });
 }
+</script>
+
+<script src="js/gsap.min.js"></script>
+<script src="js/ScrollTrigger.min.js"></script>
+<script src="js/SplitText.min.js"></script>
+<script src="js/lenis.min.js"></script>
+<script>
+// Smooth scroll (Lenis) + scroll animations (GSAP). Everything is visible without JS;
+// motion is skipped for people who have "reduce motion" switched on.
+(() => {
+  if (!window.gsap || !window.Lenis) return;
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+  const mm = gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
+    const lenis = new Lenis({ lerp: 0.1, anchors: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    const tick = (t) => lenis.raf(t * 1000);
+    gsap.ticker.add(tick); gsap.ticker.lagSmoothing(0);
+
+    // hero headline: words rise in on load
+    const h1 = document.querySelector('#top h1');
+    if (h1) SplitText.create(h1, { type: 'words,lines', mask: 'lines', autoSplit: true,
+      onSplit: (s) => gsap.from(s.words, { yPercent: 110, duration: 0.9, ease: 'expo.out', stagger: 0.05, delay: 0.1 }) });
+
+    // section headings slide up as they come into view
+    gsap.utils.toArray('section h2').forEach((h) => gsap.from(h, {
+      y: 60, opacity: 0, duration: 0.9, ease: 'expo.out',
+      scrollTrigger: { trigger: h, start: 'top 88%' } }));
+
+    // poster tiles: staggered rise, then a gentle parallax drift
+    const tiles = gsap.utils.toArray('#work figure');
+    gsap.from(tiles, { y: 80, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.12,
+      scrollTrigger: { trigger: '#work', start: 'top 75%' } });
+    tiles.forEach((f, i) => gsap.to(f.querySelector('a'), { yPercent: -4 * (i % 2 ? 1 : -1), ease: 'none',
+      scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+    // launch-pack tracklist and how-it-works steps tick in one by one
+    document.querySelectorAll('section ol').forEach((ol) => gsap.from(ol.children, {
+      x: -30, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08,
+      scrollTrigger: { trigger: ol, start: 'top 85%' } }));
+
+    // the record spins faster while you scroll
+    const rec = document.querySelector('.spin');
+    if (rec) {
+      const anim = rec.getAnimations()[0];
+      lenis.on('scroll', ({ velocity }) => { if (anim) anim.playbackRate = 1 + Math.min(Math.abs(velocity) / 8, 4); });
+    }
+    return () => { gsap.ticker.remove(tick); lenis.destroy(); };
+  });
+})();
 </script>
 </body>
 </html>
