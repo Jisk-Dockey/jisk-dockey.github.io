@@ -66,6 +66,7 @@ html.lenis body {
       </a>
       <nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 28px">
         <a href="#work" style="text-decoration: none; font-weight: 500; color: #a09d95">Work</a>
+        <a href="catalog.html" style="text-decoration: none; font-weight: 500; color: #a09d95">Catalog</a>
         <a href="#packages" style="text-decoration: none; font-weight: 500; color: #a09d95">Launch pack</a>
         <a href="#about" style="text-decoration: none; font-weight: 500; color: #a09d95">About</a>
         <a href="#contact" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border: 1px solid #ecebe6; color: #ecebe6; text-decoration: none; font-weight: 600">Get in touch</a>
@@ -138,10 +139,10 @@ html.lenis body {
           <figcaption style="font-size: 15px; color: #a09d95">JD005 · Low Hours · deep house</figcaption>
         </figure>
         <figure class="jd-tile" style="margin: 0; display: flex; flex-direction: column; gap: 10px">
-          <button type="button" class="jd-play" data-video="posters/video/solvent.mp4" data-still="posters/video/solvent-still.jpg" aria-label="Play the Solvent poster animation (hard techno, Glasgow)" style="position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 1px solid #2c2a27; overflow: hidden; background: #161514; cursor: pointer">
-            <img src="posters/video/solvent-still.jpg" alt="Solvent: hard techno, Glasgow concept poster" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block">
+          <button type="button" class="jd-play" data-video="posters/video/last-train.mp4" data-still="posters/video/last-train-still.jpg" aria-label="Play the Last Train poster animation (hard groove, Glasgow)" style="position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 1px solid #2c2a27; overflow: hidden; background: #161514; cursor: pointer">
+            <img src="posters/video/last-train-still.jpg" alt="Last Train: hard groove, Glasgow concept poster" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block">
           </button>
-          <figcaption style="font-size: 15px; color: #a09d95">JD002 · Solvent · hard techno</figcaption>
+          <figcaption style="font-size: 15px; color: #a09d95">JD010 · Last Train · hard groove</figcaption>
         </figure>
         <figure class="jd-tile" style="margin: 0; display: flex; flex-direction: column; gap: 10px">
           <button type="button" class="jd-play" data-video="posters/video/oxide.mp4" data-still="posters/video/oxide-still.jpg" aria-label="Play the Oxide poster animation (hard techno, Glasgow)" style="position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; padding: 0; border: 1px solid #2c2a27; overflow: hidden; background: #161514; cursor: pointer">
@@ -168,6 +169,7 @@ html.lenis body {
           <figcaption style="font-size: 15px; color: #a09d95">JD004 · Tracking Error · jungle / DnB</figcaption>
         </figure>
       </div>
+      <a href="catalog.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border: 1px solid #ecebe6; color: #ecebe6; text-decoration: none; font-weight: 600">See the full catalog →</a>
     </div>
   </section>
 
@@ -311,130 +313,8 @@ html.lenis body {
 <script src="js/ScrollTrigger.min.js"></script>
 <script src="js/SplitText.min.js"></script>
 <script src="js/lenis.min.js"></script>
-<script>
-// Smooth scroll (Lenis) + scroll animations (GSAP). Everything is visible without JS;
-// motion is skipped for people who have "reduce motion" switched on.
-(() => {
-  if (!window.gsap || !window.Lenis) return;
-  gsap.registerPlugin(ScrollTrigger, SplitText);
-  const mm = gsap.matchMedia();
-  mm.add('(prefers-reduced-motion: no-preference)', () => {
-    const lenis = new Lenis({ lerp: 0.1, anchors: true }); window.jdLenis = lenis;
-    lenis.on('scroll', ScrollTrigger.update);
-    const tick = (t) => lenis.raf(t * 1000);
-    gsap.ticker.add(tick); gsap.ticker.lagSmoothing(0);
+<script src="js/motion.js"></script>
 
-    // hero headline: words rise in on load
-    const h1 = document.querySelector('#top h1');
-    if (h1) SplitText.create(h1, { type: 'words,lines', mask: 'lines', autoSplit: true,
-      onSplit: (s) => gsap.from(s.words, { yPercent: 110, duration: 0.9, ease: 'expo.out', stagger: 0.05, delay: 0.1 }) });
-
-    // section headings slide up as they come into view
-    gsap.utils.toArray('section h2').forEach((h) => gsap.from(h, {
-      y: 60, opacity: 0, duration: 0.9, ease: 'expo.out',
-      scrollTrigger: { trigger: h, start: 'top 88%' } }));
-
-    // poster tiles: staggered rise
-    const tiles = gsap.utils.toArray('#work figure');
-    gsap.from(tiles, { y: 80, opacity: 0, duration: 1, ease: 'expo.out', stagger: 0.12,
-      scrollTrigger: { trigger: '#work', start: 'top 75%' } });
-
-    // launch-pack tracklist and how-it-works steps tick in one by one
-    document.querySelectorAll('section ol').forEach((ol) => gsap.from(ol.children, {
-      x: -30, opacity: 0, duration: 0.6, ease: 'power3.out', stagger: 0.08,
-      scrollTrigger: { trigger: ol, start: 'top 85%' } }));
-
-    // the record spins faster while you scroll
-    const rec = document.querySelector('.spin');
-    if (rec) {
-      const anim = rec.getAnimations()[0];
-      lenis.on('scroll', ({ velocity }) => { if (anim) anim.playbackRate = 1 + Math.min(Math.abs(velocity) / 8, 4); });
-    }
-    return () => { gsap.ticker.remove(tick); lenis.destroy(); window.jdLenis = null; };
-  });
-})();
-</script>
-
-<script>
-// Poster player: hover (or tap) a tile and it floats to the middle of the screen, plays once, then floats back.
-// Clicking the space around it, or pressing Escape, sends it back early.
-(() => {
-  const tiles = [...document.querySelectorAll('.jd-play')];
-  if (!tiles.length) return;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const canHover = matchMedia('(hover: hover) and (pointer: fine)').matches;
-  let open = null, hoverTimer = null;
-
-  const target = () => {
-    const vw = innerWidth, vh = innerHeight;
-    let h = Math.min(vh * 0.9, vw * 0.9 * 1.25), w = h / 1.25;
-    return { left: (vw - w) / 2, top: (vh - h) / 2, width: w, height: h };
-  };
-  const rectOf = (el) => { const r = el.getBoundingClientRect(); return { left: r.left, top: r.top, width: r.width, height: r.height }; };
-  const tween = (el, props, dur, onDone) => {
-    if (window.gsap && !reduce) return gsap.to(el, { ...props, duration: dur, ease: 'power3.inOut', onComplete: onDone });
-    Object.assign(el.style, Object.fromEntries(Object.entries(props).map(([k, v]) => [k, typeof v === 'number' && k !== 'opacity' ? v + 'px' : String(v)])));
-    onDone && onDone();
-  };
-
-  function show(tile) {
-    if (open) return;
-    clearTimeout(hoverTimer);
-    const from = rectOf(tile);
-    const shade = document.createElement('div');
-    shade.className = 'jd-shade';
-    shade.style.cssText = 'position:fixed;inset:0;z-index:60;background:rgba(11,11,10,0.18);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);opacity:0;cursor:zoom-out';
-    const card = document.createElement('div');
-    card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true');
-    card.setAttribute('aria-label', tile.getAttribute('aria-label').replace('Play the ', ''));
-    card.style.cssText = `position:fixed;z-index:61;left:${from.left}px;top:${from.top}px;width:${from.width}px;height:${from.height}px;overflow:hidden;background:#161514;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid #2c2a27`;
-    const still = document.createElement('img');
-    still.src = tile.dataset.still; still.alt = '';
-    still.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover';
-    const vid = document.createElement('video');
-    vid.src = tile.dataset.video; vid.muted = true; vid.playsInline = true; vid.preload = 'auto';
-    vid.setAttribute('playsinline', ''); vid.setAttribute('aria-hidden', 'true');
-    vid.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s';
-    card.append(still, vid);
-    document.body.append(shade, card);
-    tile.style.visibility = 'hidden';
-    window.jdLenis && window.jdLenis.stop();
-    open = { tile, shade, card, vid, closing: false };
-    vid.addEventListener('playing', () => { vid.style.opacity = 1; });
-    vid.addEventListener('ended', () => hide());
-    shade.addEventListener('click', () => hide());
-    tween(shade, { opacity: 1 }, 0.6);
-    const to = target();
-    tween(card, to, 0.7, () => { if (open && !open.closing) vid.play().catch(() => {}); });
-  }
-
-  function hide() {
-    if (!open || open.closing) return;
-    open.closing = true;
-    const { tile, shade, card, vid } = open;
-    vid.pause();
-    if (window.gsap) gsap.killTweensOf([card, shade]);
-    const back = rectOf(tile);
-    tween(shade, { opacity: 0 }, 0.6);
-    tween(card, back, 0.7, () => {
-      tile.style.visibility = '';
-      tile.dataset.rest = '1';          // don't reopen from hover until the pointer has left this tile
-      shade.remove(); card.remove();
-      window.jdLenis && window.jdLenis.start();
-      open = null;
-    });
-  }
-
-  tiles.forEach((tile) => {
-    tile.addEventListener('click', (e) => { e.preventDefault(); show(tile); });
-    if (canHover) {
-      tile.addEventListener('mouseenter', () => { clearTimeout(hoverTimer); if (tile.dataset.rest) return; hoverTimer = setTimeout(() => show(tile), 350); });
-      tile.addEventListener('mouseleave', () => { clearTimeout(hoverTimer); delete tile.dataset.rest; });
-    }
-  });
-  addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
-  addEventListener('resize', () => { if (open && !open.closing) Object.assign(open.card.style, Object.fromEntries(Object.entries(target()).map(([k, v]) => [k, v + 'px']))); });
-})();
-</script>
+<script src="js/poster-player.js"></script>
 </body>
 </html>
